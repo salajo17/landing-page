@@ -36,7 +36,6 @@ function anchorLinkClicked(evt) {
     var sectionName = evt.getAttribute('href');
     console.log(sectionName);
     evt.preventDefault();
-    sadadssdasd
 };
 
 /**
