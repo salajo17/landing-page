@@ -22,7 +22,6 @@
  * Define Global Variables
  * 
 */
-
 const navBar = document.querySelector('ul');
 
 /**
@@ -32,11 +31,12 @@ const navBar = document.querySelector('ul');
 */
 
 function anchorLinkClicked(evt) {
-    console.log(evt);
-    var sectionName = evt.getAttribute('href');
-    console.log(sectionName);
+    const item = evt.target.href;
+    console.log(item);
+    item.scrollIntoView({
+        behavior: 'smooth',
+    })
     evt.preventDefault();
-    sadadssdasd
 };
 
 /**
@@ -56,16 +56,9 @@ for (let i = 1; i < 4; i++) {
 
     newListItem.appendChild(newAnchorItem);
     navBar.appendChild(newListItem);
+
+    newAnchorItem.addEventListener('click', anchorLinkClicked);
 }
-
-const sectionLink2 = document.getElementById('section2link');
-const section2 = document.getElementById('section2')
-
-sectionLink2.addEventListener('click', (e) => {
-    console.log('section2 clicked')
-    section2.scrollIntoView({behavior: "smooth"});
-    e.preventDefault();
-    }, false);
 
 // Add class 'active' to section when near top of viewport
 
