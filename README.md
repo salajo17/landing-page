@@ -13,9 +13,9 @@ Landing Page
 This project is about creating a landing page using es6 javascript, css, and html.
 
 # Usage
-- JavaScript (es6)
-- CSS
-- HTML
+For practicing with javascript (beginner friendly).
 
 # dependencies
-* es6 javascript
+* JavaScript (es6)
+* CSS
+* HTML
