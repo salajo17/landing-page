@@ -38,6 +38,11 @@ const section3Bounding = section3.getBoundingClientRect();
 const section3Height = section2.offsetHeight;
 const section3Width = section3.offsetWidth;
 
+const section4 = document.getElementById('section4');
+const section4Bounding = section4.getBoundingClientRect();
+const section4Height = section4.offsetHeight;
+const section4Width = section4.offsetWidth;
+
 let currentActiveSection = null;
 
 document.addEventListener('scroll', elementInViewport);
@@ -93,9 +98,22 @@ function elementInViewport() {
             currentActiveSection = section3;
         }
         console.log('Element3 is in the viewport!');
-    }
-}
+    } else if (section4Bounding.top >= -section4Height
+        && section4Bounding.left >= -section3Width
+        && section4Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section4Width
+        && section4Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section4Height) {
 
+        section4.classList.add("active");
+        if (currentActiveSection == null) {
+            currentActiveSection = section4;
+        } else if (currentActiveSection != section4) {
+            currentActiveSection.classList.remove("active");
+            currentActiveSection = section4;
+        }
+        console.log('Element4 is in the viewport!');
+}}
+
+// Scroll to anchor ID using scrollTO event
 function navHandler(event) {
     event.preventDefault();
     const targetSection = event.target.getAttribute("data-target");
@@ -110,7 +128,7 @@ function navHandler(event) {
 */
 
 // build the nav
-for (let i = 1; i < 4; i++) {
+for (let i = 1; i < 5; i++) {
     const newListItem = document.createElement('li');
     const newAnchorItem = document.createElement('a');
 
@@ -125,22 +143,3 @@ for (let i = 1; i < 4; i++) {
 
     newAnchorItem.addEventListener('click', navHandler);
 }
-
-// Add class 'active' to section when near top of viewport
-
-
-// Scroll to anchor ID using scrollTO event
-
-
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
-
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
-
