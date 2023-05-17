@@ -60,7 +60,10 @@ function elementInViewport() {
     const section2Bounding = section2.getBoundingClientRect();
     const section3Bounding = section3.getBoundingClientRect();
 
-    if (section1Bounding.top >= -section1Height) {
+    if (section1Bounding.top >= 0
+        && section1Bounding.left >= 0
+        && section1Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section1Width
+        && section1Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section1Height) {
 
         section1.classList.add("active");
         if (currentActiveSection == null) {
@@ -70,7 +73,10 @@ function elementInViewport() {
             currentActiveSection = section1;
         }
         console.log('Element1 is in the viewport!', currentActiveSection);
-    } else if (section2Bounding.top >= -section2Height) {
+    } else if (section2Bounding.top >= 0
+        && section2Bounding.left >= 0
+        && section2Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section2Width
+        && section2Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section2Height) {
 
         section2.classList.add("active");
         if (currentActiveSection == null) {
@@ -80,7 +86,10 @@ function elementInViewport() {
             currentActiveSection = section2;
         }
         console.log('Element2 is in the viewport!');
-    } else if (section3Bounding.top >= -section3Height) {
+    } else if (section3Bounding.top >= 0
+        && section3Bounding.left >= 0
+        && section3Bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
+        && section3Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
 
         section3.classList.add("active");
         if (currentActiveSection == null) {
@@ -90,7 +99,10 @@ function elementInViewport() {
             currentActiveSection = section3;
         }
         console.log('Element3 is in the viewport!');
-    } else if (section4Bounding.top >= -section4Height) {
+    } else if (section4Bounding.top >= 0
+        && section4Bounding.left >= 0
+        && section4Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section4Width
+        && section4Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section4Height) {
 
         section4.classList.add("active");
         if (currentActiveSection == null) {
@@ -101,6 +113,14 @@ function elementInViewport() {
         }
         console.log('Element4 is in the viewport!');
 }}
+
+// Scroll to anchor ID using scrollTO event
+function navHandler(event) {
+    event.preventDefault();
+    const targetSection = event.target.getAttribute("data-target");
+    console.log(targetSection);
+    document.getElementById(targetSection).scrollIntoView({ behavior: "smooth" });
+}
 
 // Scroll to anchor ID using scrollTO event
 function navHandler(event) {
