@@ -53,16 +53,14 @@ document.addEventListener('scroll', elementInViewport);
  * 
 */
 
+// function for checking element are in view port/ changing class
 function elementInViewport() {
 
-    var section1Bounding = section1.getBoundingClientRect();
-    var section2Bounding = section2.getBoundingClientRect();
-    var section3Bounding = section3.getBoundingClientRect();
+    const section1Bounding = section1.getBoundingClientRect();
+    const section2Bounding = section2.getBoundingClientRect();
+    const section3Bounding = section3.getBoundingClientRect();
 
-    if (section1Bounding.top >= -section1Height
-        && section1Bounding.left >= -section1Width
-        && section1Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section1Width
-        && section1Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section1Height) {
+    if (section1Bounding.top >= -section1Height) {
 
         section1.classList.add("active");
         if (currentActiveSection == null) {
@@ -72,10 +70,7 @@ function elementInViewport() {
             currentActiveSection = section1;
         }
         console.log('Element1 is in the viewport!', currentActiveSection);
-    } else if (section2Bounding.top >= -section2Height
-        && section2Bounding.left >= -section2Width
-        && section2Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section2Width
-        && section2Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section2Height) {
+    } else if (section2Bounding.top >= -section2Height) {
 
         section2.classList.add("active");
         if (currentActiveSection == null) {
@@ -85,10 +80,7 @@ function elementInViewport() {
             currentActiveSection = section2;
         }
         console.log('Element2 is in the viewport!');
-    } else if (section3Bounding.top >= -section3Height
-        && section3Bounding.left >= -section3Width
-        && section3Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section3Width
-        && section3Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section3Height) {
+    } else if (section3Bounding.top >= -section3Height) {
 
         section3.classList.add("active");
         if (currentActiveSection == null) {
@@ -98,10 +90,7 @@ function elementInViewport() {
             currentActiveSection = section3;
         }
         console.log('Element3 is in the viewport!');
-    } else if (section4Bounding.top >= -section4Height
-        && section4Bounding.left >= -section3Width
-        && section4Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section4Width
-        && section4Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section4Height) {
+    } else if (section4Bounding.top >= -section4Height) {
 
         section4.classList.add("active");
         if (currentActiveSection == null) {
@@ -120,12 +109,6 @@ function navHandler(event) {
     console.log(targetSection);
     document.getElementById(targetSection).scrollIntoView({ behavior: "smooth" });
 }
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
 
 // build the nav
 for (let i = 1; i < 5; i++) {
