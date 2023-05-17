@@ -23,20 +23,22 @@
  * 
 */
 const navBar = document.querySelector('ul');
-var section1 = document.getElementById('section1');
-var section1Bounding = section1.getBoundingClientRect();
-var section1Height = section1.offsetHeight;
-var section1Width = section1.offsetWidth;
+const section1 = document.getElementById('section1');
+const section1Bounding = section1.getBoundingClientRect();
+const section1Height = section1.offsetHeight;
+const section1Width = section1.offsetWidth;
 
-var section2 = document.getElementById('section2');
-var section2Bounding = section2.getBoundingClientRect();
-var section2Height = section2.offsetHeight;
-var section2Width = section2.offsetWidth;
+const section2 = document.getElementById('section2');
+const section2Bounding = section2.getBoundingClientRect();
+const section2Height = section2.offsetHeight;
+const section2Width = section2.offsetWidth;
 
-var section3 = document.getElementById('section3');
-var section3Bounding = section3.getBoundingClientRect();
-var section3Height = section2.offsetHeight;
-var section3Width = section3.offsetWidth;
+const section3 = document.getElementById('section3');
+const section3Bounding = section3.getBoundingClientRect();
+const section3Height = section2.offsetHeight;
+const section3Width = section3.offsetWidth;
+
+let currentActiveSection = null;
 
 document.addEventListener('scroll', elementInViewport);
 
@@ -57,18 +59,39 @@ function elementInViewport() {
         && section1Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section1Width
         && section1Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section1Height) {
 
-        console.log('Element1 is in the viewport!');
+        section1.classList.add("active");
+        if (currentActiveSection == null) {
+            currentActiveSection = section1;
+        } else if (currentActiveSection != section1) {
+            currentActiveSection.classList.remove("active");
+            currentActiveSection = section1;
+        }
+        console.log('Element1 is in the viewport!', currentActiveSection);
     } else if (section2Bounding.top >= -section2Height
         && section2Bounding.left >= -section2Width
         && section2Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section2Width
         && section2Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section2Height) {
 
+        section2.classList.add("active");
+        if (currentActiveSection == null) {
+            currentActiveSection = section2;
+        } else if (currentActiveSection != section2) {
+            currentActiveSection.classList.remove("active");
+            currentActiveSection = section2;
+        }
         console.log('Element2 is in the viewport!');
     } else if (section3Bounding.top >= -section3Height
         && section3Bounding.left >= -section3Width
         && section3Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section3Width
         && section3Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section3Height) {
 
+        section3.classList.add("active");
+        if (currentActiveSection == null) {
+            currentActiveSection = section3;
+        } else if (currentActiveSection != section3) {
+            currentActiveSection.classList.remove("active");
+            currentActiveSection = section3;
+        }
         console.log('Element3 is in the viewport!');
     }
 }
@@ -76,6 +99,7 @@ function elementInViewport() {
 function navHandler(event) {
     event.preventDefault();
     const targetSection = event.target.getAttribute("data-target");
+    console.log(targetSection);
     document.getElementById(targetSection).scrollIntoView({ behavior: "smooth" });
 }
 
@@ -93,6 +117,8 @@ for (let i = 1; i < 4; i++) {
     newAnchorItem.href = `#section${i}`;
     newAnchorItem.textContent = `Section ${i}`;
     newAnchorItem.id = `section${i}link`;
+
+    newAnchorItem.setAttribute("data-target", `section${i}`);
 
     newListItem.appendChild(newAnchorItem);
     navBar.appendChild(newListItem);
