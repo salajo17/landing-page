@@ -23,29 +23,7 @@
  * 
 */
 const navBar = document.querySelector('ul');
-const section1 = document.getElementById('section1');
-const section1Bounding = section1.getBoundingClientRect();
-const section1Height = section1.offsetHeight;
-const section1Width = section1.offsetWidth;
-
-const section2 = document.getElementById('section2');
-const section2Bounding = section2.getBoundingClientRect();
-const section2Height = section2.offsetHeight;
-const section2Width = section2.offsetWidth;
-
-const section3 = document.getElementById('section3');
-const section3Bounding = section3.getBoundingClientRect();
-const section3Height = section2.offsetHeight;
-const section3Width = section3.offsetWidth;
-
-const section4 = document.getElementById('section4');
-const section4Bounding = section4.getBoundingClientRect();
-const section4Height = section4.offsetHeight;
-const section4Width = section4.offsetWidth;
-
-let currentActiveSection = null;
-
-document.addEventListener('scroll', elementInViewport);
+const sections = document.querySelectorAll('section');
 
 /**
  * End Global Variables
@@ -54,65 +32,26 @@ document.addEventListener('scroll', elementInViewport);
 */
 
 // function for checking element are in view port/ changing class
-function elementInViewport() {
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+            const navLinks = document.querySelectorAll('.navbar__menu a');
+            const activeLink = document.querySelector(`a[href="#${entry.target.id}"]`);
 
-    const section1Bounding = section1.getBoundingClientRect();
-    const section2Bounding = section2.getBoundingClientRect();
-    const section3Bounding = section3.getBoundingClientRect();
+            navLinks.forEach((link) => {
+                link.classList.remove('active')
+            });
 
-    if (section1Bounding.top >= 0
-        && section1Bounding.left >= 0
-        && section1Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section1Width
-        && section1Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section1Height) {
-
-        section1.classList.add("active");
-        if (currentActiveSection == null) {
-            currentActiveSection = section1;
-        } else if (currentActiveSection != section1) {
-            currentActiveSection.classList.remove("active");
-            currentActiveSection = section1;
+            sections.forEach((section) => {
+                section.classList.remove('active')
+            });
+            activeLink.classList.add('active');
+            entry.target.classList.add('active');
         }
-        console.log('Element1 is in the viewport!', currentActiveSection);
-    } else if (section2Bounding.top >= 0
-        && section2Bounding.left >= 0
-        && section2Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section2Width
-        && section2Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section2Height) {
+    });
+}, { threshold: .5 });
 
-        section2.classList.add("active");
-        if (currentActiveSection == null) {
-            currentActiveSection = section2;
-        } else if (currentActiveSection != section2) {
-            currentActiveSection.classList.remove("active");
-            currentActiveSection = section2;
-        }
-        console.log('Element2 is in the viewport!');
-    } else if (section3Bounding.top >= 0
-        && section3Bounding.left >= 0
-        && section3Bounding.right <= (window.innerWidth || document.documentElement.clientWidth)
-        && section3Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight)) {
-
-        section3.classList.add("active");
-        if (currentActiveSection == null) {
-            currentActiveSection = section3;
-        } else if (currentActiveSection != section3) {
-            currentActiveSection.classList.remove("active");
-            currentActiveSection = section3;
-        }
-        console.log('Element3 is in the viewport!');
-    } else if (section4Bounding.top >= 0
-        && section4Bounding.left >= 0
-        && section4Bounding.right <= (window.innerWidth || document.documentElement.clientWidth) + section4Width
-        && section4Bounding.bottom <= (window.innerHeight || document.documentElement.clientHeight) + section4Height) {
-
-        section4.classList.add("active");
-        if (currentActiveSection == null) {
-            currentActiveSection = section4;
-        } else if (currentActiveSection != section4) {
-            currentActiveSection.classList.remove("active");
-            currentActiveSection = section4;
-        }
-        console.log('Element4 is in the viewport!');
-}}
+sections.forEach((section) => observer.observe(section));
 
 // Scroll to anchor ID using scrollTO event
 function navHandler(event) {
