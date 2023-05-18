@@ -57,7 +57,6 @@ sections.forEach((section) => observer.observe(section));
 function navHandler(event) {
     event.preventDefault();
     const targetSection = event.target.getAttribute("data-target");
-    console.log(targetSection);
     document.getElementById(targetSection).scrollIntoView({ behavior: "smooth" });
 }
 
