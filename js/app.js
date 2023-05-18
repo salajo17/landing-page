@@ -77,6 +77,7 @@ for (let i = 1; i < 5; i++) {
     newAnchorItem.href = `#section${i}`;
     newAnchorItem.textContent = `Section ${i}`;
     newAnchorItem.id = `section${i}link`;
+    newAnchorItem.classList.add("menu__link");
 
     newAnchorItem.setAttribute("data-target", `section${i}`);
 
