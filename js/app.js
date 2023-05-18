@@ -61,14 +61,6 @@ function navHandler(event) {
     document.getElementById(targetSection).scrollIntoView({ behavior: "smooth" });
 }
 
-// Scroll to anchor ID using scrollTO event
-function navHandler(event) {
-    event.preventDefault();
-    const targetSection = event.target.getAttribute("data-target");
-    console.log(targetSection);
-    document.getElementById(targetSection).scrollIntoView({ behavior: "smooth" });
-}
-
 // build the nav
 for (let i = 1; i < 5; i++) {
     const newListItem = document.createElement('li');
